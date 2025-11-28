@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>글 보기</title>
+</head>
+<body>
+    <h1><%= post.title %></h1>
+    <p>작성자: <%= post.author %> | 조회수: <%= post.views %> | 날짜: <%= new Date(post.created_at).toLocaleString() %></p>
+    <hr>
+    <div style="min-height: 200px;">
+        <pre><%= post.content %></pre>
+    </div>
+    <hr>
+    <a href="/">목록으로</a>
+    <a href="/edit/<%= post.id %>">수정</a>
+    <a href="/delete/<%= post.id %>" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+</body>
+</html>

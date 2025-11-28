@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 목록</title>
+</head>
+<body>
+    <h1>📋 자유 게시판</h1>
+    
+    <form action="/" method="GET">
+        <input type="text" name="search" value="<%= search %>" placeholder="제목 검색">
+        <button type="submit">검색</button>
+    </form>
+    <hr>
+
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>조회수</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(posts.length === 0) { %>
+                <tr><td colspan="5" align="center">게시물이 없습니다.</td></tr>
+            <% } else { %>
+                <% posts.forEach(post => { %>
+                <tr>
+                    <td align="center"><%= post.id %></td>
+                    <td><a href="/view/<%= post.id %>"><%= post.title %></a></td>
+                    <td align="center"><%= post.author %></td>
+                    <td align="center"><%= post.views %></td>
+                    <td align="center"><%= new Date(post.created_at).toLocaleDateString() %></td>
+                </tr>
+                <% }) %>
+            <% } %>
+        </tbody>
+    </table>
+
+    <div style="margin-top: 20px;">
+        <a href="/write"><button>글쓰기</button></a>
+        
+        <% for(let i=1; i<=totalPages; i++) { %>
+            <a href="/?page=<%= i %>&search=<%= search %>">[<%= i %>]</a>
+        <% } %>
+    </div>
+</body>
+</html>
